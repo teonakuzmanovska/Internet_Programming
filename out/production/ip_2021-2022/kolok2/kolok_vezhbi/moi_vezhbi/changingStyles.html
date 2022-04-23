@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+
+color<select id="color" onclick="changeColor()">
+    <option value="red">red</option>
+    <option value="blue">blue</option>
+    <option value="green">green</option>
+    <option value="#FF00FF">#FF00FF</option>
+</select>
+
+width<select id="width" onclick="changeWidth()">
+    <option value="100px">100</option>
+    <option value="200px">200</option>
+    <option value="600px">600</option>
+  </select>
+
+background-color<select id="backgroundColor" onclick="changeBg()">
+    <option value="yellow">yellow</option>
+    <option value="black">black</option>
+    <option value="pink">pink</option>
+</select>
+
+<script>
+
+    var paragraf = document.getElementsByTagName("p")[0]
+
+    function changeColor(){
+        var color = document.getElementById("color").value
+        paragraf.style.color = color
+    }
+
+    function changeWidth(){
+        var width = parseInt(document.getElementById("width").value)
+        paragraf.style.width = width + "px"
+    }
+
+    function changeBg(){
+        var background = document.getElementById("backgroundColor").value
+        paragraf.style.backgroundColor = background
+    }
+</script>
+</body>
+</html>

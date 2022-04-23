@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+colors<input type="text" id="colors">
+delimiter<input type="text" id="delimiter">
+<input value="draw" type="button" onclick="draw()">
+<div id="container"></div>
+<script>
+    function draw(){
+        var container = document.getElementById("container")
+        var stringColors = document.getElementById("colors").value
+        var delimiter = document.getElementById("delimiter").value
+        var arrColors = stringColors.split(delimiter)
+
+
+        for (var i=0;i<arrColors.length;i++)
+           container.innerHTML += "<div style='width: 100px; height: 100px; background-color: "+arrColors[i]+"' onclick='this.remove()'></div>"
+    }
+</script>
+</body>
+</html>

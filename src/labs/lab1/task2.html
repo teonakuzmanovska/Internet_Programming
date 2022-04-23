@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Make a web page where a cell number is read from the keyboard (via prompt) in the following format
+XXYYYZZZ (ex. 71298486). The program should print it in this format: XXX / YYY-ZZZ (ex. 071 / 298-486).
+In addition, the operator name should also be printed. (070/071/072 - T-mobile, 075/076 - One, 077/078 -
+Vip).-->
+<script>
+    var telephone_num = prompt("Enter a macedonian cell number in format XXYYYZZZ (ex. 71298486)")
+    var operator = ""
+
+    if (telephone_num[1]==0 || telephone_num[1]==1 || telephone_num[1]==2)
+        operator = "T-Mobile"
+    if (telephone_num[1]==5 || telephone_num[1]==6)
+        operator == "ONE"
+    if (telephone_num[1]==7 || telephone_num[1]==8)
+        operator == "Vip"
+    else
+        operator == "unknown"
+
+    var formated_number = "0"+telephone_num[0]+telephone_num[1]+"/"
+    console.log("0"+telephone_num[0]+telephone_num[1])
+    for (var i=2;i<=4;i++)
+        formated_number += telephone_num[i]
+    formated_number += "-"
+    for (var i=5;i<=7;i++)
+        formated_number += telephone_num[i]
+    console.log(formated_number)
+
+    alert(formated_number+" "+operator)
+
+</script>
+
+</body>
+</html>

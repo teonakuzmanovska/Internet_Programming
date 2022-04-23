@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Make a web page that checks for a three-digit number entered by a keyboard (via prompt) whether it is a palindrome
+and will print an appropriate message on the screen. If the number entered is not three-digit number a message should
+be printed that the entered number cannot be verified.-->
+<script>
+    var number = prompt("Enter a 3-digit number and I will tell you if it's a palindrome")
+
+    if (number.length != 3)
+        alert("I need a 3-digit number")
+    else
+    {
+        if (number[0] == number[2])
+            alert("The number is a palindrome")
+        else
+            alert("The number is NOT a palindrome")
+    }
+</script>
+</body>
+</html>

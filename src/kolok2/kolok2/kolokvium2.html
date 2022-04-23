@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="zborovi">
+<input type="button" value="prikazhi" onclick="prikazhi(this)">
+<script>
+    var listaZborovi
+    var interval
+
+    function prikazhi(elem)
+    {
+        var zborovi = document.getElementById("zborovi").value
+        listaZborovi = zborovi.split(' ') // napraj go so poishe space-ovi
+        console.log(listaZborovi)
+
+        remove(elem)
+        interval = setInterval(animacija, 10)
+
+    }
+
+    function remove(kopche)
+    {
+        kopche.remove()
+        var pole = document.getElementById("zborovi")
+        pole.remove()
+    }
+
+    var boi = ["red", "blue", "yellow", "green", "magenta", "orange", "purple"]
+
+    function changeText(newText)
+    {
+        var randomFont = parseInt(Math.random() * (48 - 10) + 10)
+        var randomBoja = parseInt(Math.random() * ((boi.length - 1) - 1) + 1)
+        var leftPoz = parseInt(Math.random() * (100 - 5) + 5)
+        var topPoz = parseInt(Math.random() * (100 - 5) + 5)
+
+        console.log(randomFont)
+        console.log(randomBoja)
+        console.log(boi[randomBoja])
+
+        newText.style.color = boi[randomBoja]
+        newText.style.fontSize = randomFont + "px"
+        newText.style.left = leftPoz + "px"
+        newText.style.top = topPoz + "px"
+
+    }
+
+    function animacija()
+    {
+        var displayedWords = document.getElementsByTagName("p")
+
+        // biraj random element od listata listaZborovi
+        randomZbor = parseInt(Math.random() * ((listaZborovi.length - 1) - 0) + 0)
+
+        if(displayedWords.length < listaZborovi.length)
+        {
+            var newNode = document.createElement("p")
+            var newText = document.createTextNode(listaZborovi[randomZbor])
+
+            // var newText = document.createTextNode("boja")
+
+            newNode.appendChild(newText)
+            changeText(newNode)
+            document.body.appendChild(newNode)
+
+            listaZborovi.pop(listaZborovi[randomZbor])
+        }
+
+        if(displayedWords.length == listaZborovi.length){
+            clearInterval(interval)
+        }
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+  <script>
+  </script>
+</head>
+<body>
+<h1>Калкулатор</h1>
+<div>
+  <div style="text-align:left; float:left">
+    <p>а <input id="a" style="width:15px"/>b <input id="b" style="width:15px"/></p>
+    <p>
+      <input id="plus" type="radio" name="oper" checked>a+b
+      <input id="minus" type="radio" name="oper">a-b
+      <input id="mnoz" type="radio" name="oper" >a*b
+      <input id="del" type="radio" name="oper" >a/b
+      <br>
+      <input id="sin" type="radio" name="oper">sin(a)
+      <input id="cos" type="radio" name="oper">cos(a)
+      <input id="tg" type="radio" name="oper">tg(a)
+      <br>
+      <input id="cel" type="radio" name="oper">[a]
+      <input id="stepen" type="radio" name="oper">a<sup>b</sup>
+      <input id="koren" type="radio" name="oper">&radic;<span style="text-decoration:overline">a</span>
+    </p>
+    <button onclick="presmetaj()">Пресметај</button>
+    <p id="rezultat"></p>
+  </div>
+</div>
+<br/>
+
+<script>
+
+  function presmetaj(){
+
+    var operacija = document.getElementsByName("oper")
+
+    var a = parseFloat(document.getElementById("a").value)
+    var b = parseFloat(document.getElementById("b").value)
+
+    var rezultat = document.getElementById("rezultat")
+
+    var selected
+    for (var i=0;i<operacija.length;i++){
+      if(operacija[i].checked){
+        selected = operacija[i]
+        break;
+      }
+    }
+
+    switch (selected.id){
+      case "plus":
+        rezultat.innerHTML = a+b;
+        break;
+      case "minus":
+        rezultat.innerHTML = a-b;
+        break;
+      case "mnoz":
+        rezultat.innerHTML = a*b;
+        break;
+      case "del":
+        rezultat.innerHTML = a/b;
+        break;
+      case "sin":
+        rezultat.innerHTML = Math.sin(a);
+        break;
+      case "cos":
+        rezultat.innerHTML = Math.cos(a);
+        break;
+      case "tan":
+        rezultat.innerHTML = Math.tan(a);
+        break;
+      case "cel":
+        rezultat.innerHTML = parseInt(a);
+        break;
+      case "stepen":
+        rezultat.innerHTML = Math.pow(a,b);
+        break;
+      case "koren":
+        rezultat.innerHTML = Math.sqrt(a);
+        break;
+    }
+
+  }
+
+</script>
+</body>
+</html>

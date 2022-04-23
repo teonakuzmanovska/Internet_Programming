@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Promena na pozadina</h1>
+
+<div>
+    <input type="radio" value="backgroundColor" name="opcii">Color
+    <input type="radio" value="backgroundImage" name="opcii">Image
+</div>
+
+<div>Value:<input type="text" id="source"></div>
+<div><input type="button" value="promeni" onclick="promeni()"></div>
+
+<script>
+    function promeni()
+    {
+        var opcii = document.getElementsByName("opcii");
+        var checked = ""
+
+        for (var i=0;i<opcii.length;i++){
+            if(opcii[i].checked){
+                checked = opcii[i].value;
+                break;
+            }
+        }
+
+        var pozadina = document.getElementById("source").value
+
+        if(checked == "backgroundColor")
+            document.body.style.backgroundColor = pozadina
+        if(checked == "backgroundImage")
+            document.body.style.backgroundImage = "url("+pozadina+")"
+    }
+</script>
+</body>
+</html>

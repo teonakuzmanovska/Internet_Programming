@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // Да се креира поле од објекти, каде секој објект репрезентира книга со следните
+    // својства title (string), author (string), и alreadyRead (boolean кој означува дали е прочитана или не).
+    // Да се изминaт сите објекти од полето и за секој објект да се испечати авторот, името на книгата и
+    // врз основа на тоа дали е прочитана или не, да се испечати соодветна порака.
+    // Пр.
+    // 'You already read "The Hobbit" by J.R.R. Tolkien'
+    // 'You still need to read "The Lord of the Rings" by J.R.R. Tolkien.'
+
+    var books = [
+        { title : "The Hobbit", author: "J.R.R. Tolkien", alreadyRead: true },
+        { title : "The Lord of the Rings", author: "J.R.R. Tolkien", alreadyRead: false }
+    ]
+
+    function proveriKnigi(books){
+        for (var i=0;i<books.length;i++){
+            if (books[i].alreadyRead == true){
+                console.log("You already read "+books[i].title+" by "+books[i].author)
+            }
+            else
+                console.log("You still need to read "+books[i].title+" by "+books[i].author)
+        }
+    }
+
+    proveriKnigi(books)
+
+</script>
+</body>
+</html>

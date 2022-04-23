@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>Items: <input type="text" id="items"></div>
+<div>
+    <select id="type">
+        <option value="radio">Radio button</option>
+        <option value="checkbox">Check box</option>
+    </select>
+</div>
+<div>
+    <input type="button" value="prikazhi" onclick="prikazhi()">
+</div>
+<div id="container">
+
+</div>
+<script>
+    function prikazhi(){
+
+        var items = document.getElementById("items").value;
+        var type = document.getElementById("type").value;
+
+        var nizaItems = items.split(",")
+
+        var container = document.getElementById("container")
+
+        var tekst = "<div>"
+        for (var i=0;i<nizaItems.length;i++){
+            tekst += "<input type='"+type+"' name='isti'>"+nizaItems[i]
+        }
+        tekst += "</div>"
+
+        container.innerHTML += tekst
+
+        document.getElementById("items").value = "";
+        document.getElementById("type").value = "radio";
+    }
+</script>
+</body>
+</html>

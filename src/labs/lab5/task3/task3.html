@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    img
+    {
+        width: 100px;
+        height: 100px;
+    }
+</style>
+<body>
+<h1>Meморија</h1>
+<div style="text-align:left; float:left">
+    <table border="1">
+        <tr>
+            <td id="11" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="12" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="13" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="14" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+        </tr>
+        <tr>
+            <td id="21" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="22" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="23" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="24" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+        </tr>
+        <tr>
+            <td id="31" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="32" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="33" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="34" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+        </tr>
+        <tr>
+            <td id="41" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="42" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="43" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+            <td id="44" onclick="returnImage(this)"><img src="https://smith.queensu.ca/_templates/images/content/smith/home/home-news-edii-square.jpg"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="RESET"/>
+</div>
+<br/>
+
+<script>
+
+    function returnImage(slot){
+        return slot.innerHTML
+    }
+
+    // pristapuvanje slotovi od html
+
+    var poz11 = document.getElementById("11")
+    var poz12 = document.getElementById("12")
+    var poz13 = document.getElementById("13")
+    var poz14 = document.getElementById("14")
+    var poz21 = document.getElementById("21")
+    var poz22 = document.getElementById("22")
+    var poz23 = document.getElementById("23")
+    var poz24 = document.getElementById("24")
+    var poz31 = document.getElementById("31")
+    var poz32 = document.getElementById("32")
+    var poz33 = document.getElementById("33")
+    var poz34 = document.getElementById("34")
+    var poz41 = document.getElementById("41")
+    var poz42 = document.getElementById("42")
+    var poz43 = document.getElementById("43")
+    var poz44 = document.getElementById("44")
+
+    // smestuvanje na slotovi vo lista
+
+    var listaSlotovi = []
+
+    listaSlotovi.push(
+        poz11, poz12, poz13, poz14,
+        poz21, poz22, poz23, poz24,
+        poz31, poz32, poz33, poz34,
+        poz41, poz42, poz43, poz44
+    )
+
+    // pravenje lista od slikichki
+
+    var listaSlikichki = [
+        "https://h5p.org/sites/default/files/h5p/content/441774/images/image-5c73c35b6bd02.png",
+        "https://h5p.org/sites/default/files/h5p/content/441774/images/image-5c73c2eab7464.png",
+        "https://h5p.org/sites/default/files/h5p/content/441774/images/image-5c73c2f5a07ac.png",
+        "https://h5p.org/sites/default/files/h5p/content/441774/images/image-5c73c3070603f.png",
+        "https://h5p.org/sites/default/files/h5p/content/441774/images/image-5c73c2fe20e2e.png",
+        "https://h5p.org/sites/default/files/h5p/content/441774/images/image-5c73c30a7e671.png",
+        "https://h5p.org/sites/default/files/h5p/content/441774/images/image-5c73c3360c26a.png",
+        "https://h5p.org/sites/default/files/h5p/content/441774/images/image-5c73c3c3276ba.png"
+    ]
+
+    // randomiziranje na rasporedot na elementite vo listaSlotovi
+
+    function shuffle(listaSlotovi) {
+        listaSlotovi.sort(() => Math.random() - 0.5);
+    }
+
+    shuffle(listaSlotovi)
+
+    var j = 0
+    for (var i=0; i<=listaSlotovi.length; i+=2)
+    {
+        listaSlotovi[i].innerHTML = "<img src='"+listaSlikichki[j]+"'>"
+        listaSlotovi[i+1].innerHTML = "<img src='"+listaSlikichki[j]+"'>"
+
+        j++
+    }
+
+</script>
+</body>
+</html>

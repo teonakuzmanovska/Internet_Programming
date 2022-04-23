@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>Name</p>
+<input type="text" id="name">
+<p>Surname</p>
+<input type="text" id="surname">
+<p>EMBG</p>
+<input type="text" id="embg">
+<div>
+    <button onclick="add()">Add</button>
+</div>
+<table id="table">
+
+</table>
+
+<script>
+    function add() {
+        var name = document.getElementById("name")
+        name = name.value
+        var surname = document.getElementById("surname")
+        surname = surname.value
+        var embg = document.getElementById("embg")
+        embg = embg.value
+        if (!name || !surname || !embg){
+            alert("Popolnete gi site podatoci!")
+            return
+        }
+        //  ddmmyyyqwerty
+        var datum = parse_embg(embg)
+        if(!datum){
+            alert("Nepravilen matichen broj")
+            return
+        }
+        var table = document.getElementById("table")
+        var row = table.insertRow()
+        var cell1 = row.insertCell()
+        cell1.innerHTML = name
+        var cell2 = row.insertCell()
+        cell2.innerHTML = surname
+        var cell3 = row.insertCell()
+        cell3.innerHTML = "<button onclick='remove(this)'>Remove</button>"
+        row.style.background = "green"
+    }
+    function parse_embg(embg) {
+        if(embg.length!=13){
+            return false
+        }
+        temp_embg = embg
+        embg = parseInt(embg)
+        if(isNaN(embg)){
+            return false
+        }
+        var godina = Math.floor((embg/1000000)%1000)
+        console.log(godina)
+        var mesec = Math.floor((embg/1000000000)%100)
+        var den = Math.floor(embg/100000000000)
+        if(den>=1 && den<=31 && mesec>=1 && mesec<=12 && godina>=900){
+            return den+"."+mesec+"."+(1000+godina)
+        }
+        return false
+    }
+    function remove(element) {
+        var redica = element.parentNode.parentNode
+        redica.parentNode.removeChild(redica)
+    }
+</script>
+
+</body>
+</html>

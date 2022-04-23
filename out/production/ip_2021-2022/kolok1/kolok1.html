@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Osiguruvanje na vozila</h2>
+<div>Ime<input type="text" id="ime"></div>
+<div>Prezme<input type="text" id="prezime"></div>
+<div>Registracija<input type="text" id="registracija"></div>
+<div>Godini<input type="text" id="godini"></div>
+<div>Nezgoda: da<input type="radio" name="nezgoda" id="da" value="da">ne<input type="radio" name="nezgoda" id="ne" value="ne"></div>
+<div><input type="button" value="generiraj smetka" onclick="generirajSmetka()"></div>
+<h2>Smetki</h2>
+<div id="smetki">
+
+</div>
+<script>
+    function generirajSmetka(){
+        var ime = document.getElementById("ime").value
+        var prezime = document.getElementById("prezime").value
+        var registracija = document.getElementById("registracija").value
+        var godini = document.getElementById("godini").value
+        var daNezgoda = document.getElementById("da").checked
+        var neNezgoda = document.getElementById("ne").checked
+
+        console.log(daNezgoda.checked == true)
+        console.log(neNezgoda.checked == true)
+
+        //Треба да се провери дали форматот на внесената таблица одговара на форматот во нашата држава,
+        // односно AB-1234-QW (две букви-четири броеви-две букви) (15 поени).
+        // Исто така, потребно е да се пресмета цената која сопственикот треба да ја плати.
+        // Основата на цената е 3000 денари,
+        // а дополнително се додава 1000 денари доколку возилото има златна таблица (сите четири броеви се исти).
+        // Исто така, доколку возилото учествувало во сообраќајна незгода претходно се додаваат уште 500 денари (15 поени).
+        // Соодветно, сметката е обоена во црвено доколку станува збор за возило постаро од 30 години,
+        // а во спротивно е зелена (5 поени). Во сметката има и копчиња „Плати“ и „Избриши“.
+        // За секоја сметка при кликнување на копчето „Плати“ двете копчиња се оневозможуваат,
+        // а при клик на копчето „Избриши“ избраната сметка се брише од погледот
+
+        if (ime=="" || prezime == "" || registracija=="" || (daNezgoda == false && neNezgoda == false)){
+            alert("Vnesete gi site podatoci")
+            return
+        }
+        else {
+            var validna = validnaTablica(registracija) //prima brojka
+            if (!validna){ //ne e brojka, false e
+                alert("Pogreshna registracija")
+            }
+            else { //primila brojka, prodolzhi so rabota
+                dodavajSmetki(ime,prezime,registracija,neNezgoda,daNezgoda,godini)
+            }
+        }
+
+    }
+    function validnaTablica(registracija){
+        if (registracija.length != 10){
+            return false;
+        }
+        else {
+            if(isNaN(registracija.charAt(0)) && isNaN(registracija.charAt(1)) && registracija.charAt(2) == "-" && registracija.charAt(7) == "-" && isNaN(registracija.charAt(8)) && isNaN(registracija.charAt(9)))
+                var brojka = registracija.slice(3,7)
+                brojka = parseInt(brojka)
+                if (isNaN(brojka)){
+                    return false
+                }
+                else{
+                    return brojka // ja vrakjam brojkata
+                }
+
+            }
+    }
+    function zlatnaRegistracija(validna){
+        //1234
+        var prva = validna/1000
+        var vtora = validna/100%10
+        var treta = validna/10%10
+        var chetvrta = validna%10
+
+        if (prva == vtora == treta == chetvrta){
+            return true //zlatna
+        }
+        else
+            return false //ne e zlatna
+    }
+    function dodavajSmetki(ime,prezime,registracija,neNezgoda,daNezgoda,godini){
+        var validna = validnaTablica(registracija) //prima brojka
+        var smetki = document.getElementById("smetki")
+        var zlatna = zlatnaRegistracija(validna) // prima true ili false
+        var soobrakjajka = soobrakjajka(daNezgoda)
+
+        var imaNema = ""
+
+        if (soobrakjajka == true){
+            imaNema = "ima"
+        }
+        else
+            imaNema = "nema"
+
+        var cena = cenaSmetka(zlatna,daNezgoda,neNezgoda)
+
+        if(godini>30){
+            smetka = "<div style='background-color: red'>" +
+                "<div>"+ime+" "+prezime+"</div>" +
+                "<div>"+registracija+"</div>"+
+                "<div>Nezgoda: "+imaNema+"</div>"+
+                "<div>Starost na vozilo: "+godini+"</div>"+
+                "<div>Za plakjanje: "+cena+"</div>"+
+                // "<div><input type='button' onclick='plati'></div>"+
+                "<div><input type='button' onclick='izbrishi(this)'></div>"+
+                "</div>"
+        }
+        else {
+            smetka = "<div style='background-color: green'>" +
+                "<div>"+ime+" "+prezime+"</div>" +
+                "<div>"+registracija+"</div>"+
+                "<div>Nezgoda: "+imaNema+"</div>"+
+                "<div>Starost na vozilo: "+godini+"</div>"+
+                "<div>Za plakjanje: "+cena+"</div>"+
+                // "<div><input type='button' onclick='plati'></div>"+
+                "<div><input type='button' onclick='izbrishi(this)'></div>"+
+                "</div>"
+
+        }
+
+        smetki.innerHTML += smetka
+
+    }
+
+    function soobrakjajka(daNezgoda){
+        if (daNezgoda == true)
+            return true
+        else
+            return false
+    }
+
+    function cenaSmetka(zlatna,daNezgoda){
+        var cena = 3000
+
+        if (!zlatna){
+            cena += 1000
+            if (daNezgoda == true){
+                cena += 500
+            }
+        }
+        else {
+            if (daNezgoda == true){
+                cena += 500
+            }
+        }
+
+        return cena
+    }
+    function izbrishi(elem){
+        var divv = elem.parentNode.parentNode
+        div.parentNode.childNodes.removeChild(divv)
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Forma za vnesuvanje oceni</h1>
+<div>Ime: <input type="text" id="ime"></div>
+<div>Prezme: <input type="text" id="prezime"></div>
+<div>Indeks: <input type="text" id="indeks"></div>
+<div>Predmet: <input type="text" id="predmet"></div>
+<div>Ocena:
+    <select id="ocena">
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+</div>
+<div><input type="button" onclick="vnesi()" id="vnesi" value="vnesi"></div>
+<div>
+    <table id="tabela">
+        <tr>
+            <th>ime</th>
+            <th>prezime</th>
+            <th>indeks</th>
+            <th>predmet</th>
+            <th>ocena</th>
+        </tr>
+    </table>
+</div>
+<script>
+    function vnesi()
+    {
+        var ime = document.getElementById("ime").value;
+        var prezime = document.getElementById("prezime").value;
+        var indeks = document.getElementById("indeks").value;
+        var predmet = document.getElementById("predmet").value;
+        var ocena = document.getElementById("ocena").value;
+
+        var tabela = document.getElementById("tabela")
+
+        tabela.innerHTML += "<tr>" +
+            "<td>"+ime+"</td>" +
+            "<td>"+prezime+"</td>" +
+            "<td>"+indeks+"</td>" +
+            "<td>"+predmet+"</td>" +
+            "<td>"+ocena+"</td>" +
+            "</tr>"
+
+        var niza = []
+
+        var objekt = {Ime: ime, Prezime: prezime, Indeks: indeks, Predmet: predmet, Ocena: ocena}
+
+        niza.push(objekt)
+        console.log(niza)
+
+        document.getElementById("ime").value = "";
+        document.getElementById("prezime").value = "";
+        document.getElementById("indeks").value = "";
+        document.getElementById("predmet").value = "";
+        document.getElementById("ocena").value = "5";
+    }
+</script>
+</body>
+</html>

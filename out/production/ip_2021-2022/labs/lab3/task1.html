@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // Да се напише функција во JavaScript која како аргумент прима листа, а како резултат ја враќа листата
+    // каде се избришани дупликатите.
+
+    function uniq(lista) {
+        var duplikat = {};
+        return lista.filter(function(elem) {
+            return duplikat.hasOwnProperty(elem) ? false : (duplikat[elem] = true);
+        });
+    }
+
+    console.log(uniq([1,1,2,3,4,2,5,6,7,3]))
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Create a web page where two complex numbers are entered through the text fields (shown in the figure
+below). The page will also contain the Add button, which will collect both complex numbers as a result and
+will write the result into two text fields-->
+
+    <div><input type="text" id="real1"><input type="text" id="complex1"><span>i</span></div>
+    <div><input type="text" id="real2"><input type="text" id="complex2"><span>i</span></div>
+    <p></p>
+    <div><input type="button" value="Add" onclick="addComplex()"></div>
+    <p></p>
+    <div><input type="text" id="real_result"><input type="text" id="complex_result"><span>i</span></div>
+
+<script>
+    function addComplex(){
+
+        var real1 = document.getElementById("real1").value
+        var real2 = document.getElementById("real2").value
+        var complex1 = document.getElementById("complex1").value
+        var complex2 = document.getElementById("complex2").value
+
+        document.getElementById("real_result").value = parseInt(real1)+parseInt(real2)
+        document.getElementById("complex_result").value = parseInt(complex1)+parseInt(complex2)
+    }
+</script>
+
+</body>
+</html>

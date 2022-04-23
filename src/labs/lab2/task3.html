@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Type a JavaScript code that will make the following changes:
+The body tag will set Arial font
+It will fill the content of the span tags with the appropriate information (name, surname and city).
+Set red color to every li tag
+-->
+<h1>About Me</h1>
+Internet programing
+<ul>
+    <li>Name: <span id="name"></span>
+    <li>Index: <span id="index"></span>
+    <li>Hometown: <span id="hometown"></span>
+</ul>
+<script>
+
+    document.getElementsByTagName("body")[0].style.fontFamily = "Arial"
+
+    document.getElementById("name").innerText += "Teona"
+    document.getElementById("index").innerText += "191523"
+    document.getElementById("hometown").innerText += "Skopje"
+
+    var lis = document.getElementsByTagName("li")
+
+    for (var i=0;i<lis.length;i++)
+    {
+        lis[i].style.color = "#ff0000"
+    }
+
+</script>
+</body>
+</html>

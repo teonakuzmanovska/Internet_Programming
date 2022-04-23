@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Make a web page where a string will be entered from the keyboard (via prompt). The program should print
+the longest word within the string.
+Example:
+Input: Fist laboratory exercise
+Output: laboratory-->
+<script>
+    var string = prompt("Enter a string")
+    var array = string.split(" ")
+    console.log(array)
+
+    var max_length = 0
+    var longest_word = ""
+
+    for (var i=0;i<array.length;i++)
+    {
+        if (array[i].length > max_length)
+        {
+            longest_word = array[i]
+            max_length = array[i].length
+        }
+    }
+
+    alert(longest_word)
+
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--20:35-->
+<!--21:15-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function dodadi()
+        {
+            var ime = document.getElementById("ime").value
+            var prezime = document.getElementById("prezime").value
+            var matichen = document.getElementById("matichen").value
+
+
+            console.log(matichen)
+
+            if (ime=="" || prezime=="" || matichen==""){
+                alert("Vnesete gi site podatoci")
+                return ;
+            }
+
+            else{
+
+                var tmp = parseInt(matichen)
+
+                if (matichen.length != 13 || tmp/1000000%1000 < 900){
+
+                    alert("pogreshen matichen broj")
+                    return ;
+                }
+                else{
+                    // 2301001455041
+
+                    var den = parseInt(tmp/100000000000)
+                    var mesec = parseInt(tmp/1000000000%100)
+                    var godina = parseInt(tmp/1000000%1000)
+
+                    console.log(den+" "+mesec+" "+godina)
+
+                    var tabela = document.getElementById("tabela")
+                    console.log(tabela)
+                    tabela.innerHTML += "<tr style='background-color: darkgreen'>" +
+                        "<td>"+ime+"</td><td>"+prezime+"</td>" +
+                        "<td>"+rodenden(den,mesec,godina)+"</td>" +
+                        "<td><input type='button' value='otstrani' onclick='otstrani(this)'></td>"+
+                        "</tr>"
+                }
+            }
+
+        }
+        function rodenden(den,mesec,godina){
+
+            console.log(godina)
+            var godina1 = 1000+godina
+            console.log(godina1)
+            return den+"-"+mesec+"-"+godina1
+        }
+
+        function otstrani(elem){
+            elem.parentNode.parentNode.remove()
+        }
+    </script>
+</head>
+<body>
+<div>
+    Ime <input type="text" id="ime">
+</div>
+<div>
+    Prezime <input type="text" id="prezime">
+</div>
+<div>
+    Matichen <input type="text" id="matichen">
+</div>
+<div>
+    <input type="button" value="dodadi" onclick="dodadi()" id="dodadi">
+</div>
+<table id="tabela">
+
+</table>
+
+</body>
+</html>

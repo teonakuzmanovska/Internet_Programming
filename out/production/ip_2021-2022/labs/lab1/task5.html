@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Make a web page where JavaScript will iterate the numbers from 0 to 30. In each iteration, the current
+number will be printed on the screen (document.write) and will write whether the number is even or odd.
+Example:
+0 is even.
+1 is odd.
+2 is even.
+3 is odd.
+…-->
+<script>
+    var even_odd = ""
+    for (var i=0;i<=30;i++)
+    {
+        if (i%2 == 0)
+            even_odd = "even"
+        else
+            even_odd = "odd"
+
+        document.write(i+" is "+even_odd+"<br>")
+    }
+</script>
+</body>
+</html>

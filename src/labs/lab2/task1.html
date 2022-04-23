@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <select id="colorSelect">
+        <option>Red</option>
+        <option>Green</option>
+        <option>White</option>
+        <option>Black</option>
+    </select>
+    <input type="button" onclick="removeColor()" value="Select and Remove"><br>
+</form>
+<!--To do: write a function removeColor() that prints in the console the currently selected element from the
+list and will be deleted from it.-->
+<script>
+    function removeColor(){
+        var selected = document.getElementById("colorSelect")
+        console.log(selected.value)
+        var options = document.getElementsByTagName("option")
+        for (var i=0;i<options.length;i++){
+            if (options[i].innerText == selected.value){
+                options[i].parentNode.removeChild(options[i])
+                break;
+            }
+        }
+
+    }
+</script>
+</body>
+</html>

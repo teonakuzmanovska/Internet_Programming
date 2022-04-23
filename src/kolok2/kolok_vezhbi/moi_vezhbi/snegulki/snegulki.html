@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="s1.png">
+<img src="s2.png">
+<img src="s3.png">
+<img src="s4.png">
+<img src="s5.png">
+<img src="s6.png">
+<script src="../jquery-3.5.1.min.js"></script>
+<script>
+    var snegulki = document.getElementsByTagName("img")
+
+    for (var i=0; i<= snegulki.length; i++)
+        snowing(snegulki[i])
+
+
+    function snowing(elem)
+    {
+
+        var leftp = Math.random()*1200;
+        var speedp = (Math.random() + 0.5) * 5000;
+
+        $(elem).css({position: 'absolute', top:'-200px', left:leftp, width: '150px'})
+        $(elem).animate({top:'950px'}, speedp, function() {snowing(elem)})
+
+    }
+
+</script>
+</body>
+</html>

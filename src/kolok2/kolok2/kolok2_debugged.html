@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="zborovi">
+<input type="button" value="prikazhi" onclick="prikazhi(this)">
+<script>
+    var listaZborovi
+    var interval
+    const counts = {}; // --ova go dodadov kako globalna promenliva
+
+    function prikazhi(elem)
+    {
+        var zborovi = document.getElementById("zborovi").value
+        listaZborovi = zborovi.split(' ') // napraj go so poishe space-ovi
+        console.log(listaZborovi)
+
+        remove(elem)
+        interval = setInterval(animacija, 500) // --ovde imav 10, taka gi printa postepeno
+
+        // -- ova go dodadov za pojavuvanja
+
+        for (const num of listaZborovi)
+            counts[num] = counts[num] ? counts[num] + 1 : 1;
+
+        // do tuka
+
+    }
+
+    function remove(kopche)
+    {
+        kopche.remove()
+        var pole = document.getElementById("zborovi")
+        pole.remove()
+    }
+
+    var boi = ["red", "blue", "yellow", "green", "magenta", "orange", "purple"]
+
+    function changeText(newText, element) // --tuka dodadov element kako argument
+    {
+        var randomFont = parseInt(Math.random() * (48 - 10) + 10)
+        var randomBoja = parseInt(Math.random() * ((boi.length - 1) - 1) + 1)
+        var leftPoz = parseInt(Math.random() * (1500 - 5) + 5) // --tuka staviv 1500 mesto 150
+        var topPoz = parseInt(Math.random() * (1500 - 5) + 5) // --tuka staviv 1500 mesto 150
+
+        console.log(randomFont)
+        console.log(randomBoja)
+        console.log(boi[randomBoja])
+
+        newText.style.color = boi[randomBoja]
+        newText.style.fontSize = randomFont*counts[element]+ "px" // --tuka pomnozhiv po counts[element]
+        newText.style.left = leftPoz + "px"
+        newText.style.top = topPoz + "px"
+        newText.style.position = 'absolute' // --tuka dodadov position absolute
+
+    }
+
+    var index = 0
+    function animacija()
+    {
+        // var displayedWords = document.getElementsByTagName("p")
+
+        // biraj random element od listata listaZborovi
+        // var randomZbor = parseInt(Math.random() * listaZborovi.length) // --tuka ostaviv samo listaZborovi.length
+
+        if(index < listaZborovi.length) // --tuka staviv index mesto displayedWords.length
+        {
+            var newNode = document.createElement("p")
+            var newText = document.createTextNode(listaZborovi[index]) // --ovde staiv index mesto randomZbor
+
+            // var newText = document.createTextNode("boja")
+
+            newNode.appendChild(newText)
+            changeText(newNode, listaZborovi[index]) // --tuka go prativ listaZborovi[index]
+            document.body.appendChild(newNode)
+
+            // listaZborovi.pop(listaZborovi[randomZbor])
+
+            index ++ // --ova go dodadov
+
+        }
+
+        else  // --tuka staviv else mesto if(displayedWords.length == kraj)
+        {
+            clearInterval(interval)
+        }
+    }
+
+</script>
+</body>
+</html>
