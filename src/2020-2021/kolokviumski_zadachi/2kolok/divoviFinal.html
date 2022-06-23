@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>kolok2Final</title>
+    <script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+
+<input type="button" value="<" id="levo" onclick="dvizhiLevo()">
+<input type="button" value=">" id="desno" onclick="dvizhiDesno()">
+
+<div id="prvDiv">
+
+</div>
+
+<script>
+    console.log("prvDiv")
+
+    var jsonKolok = '[' +
+        '{"backgroundColor":"red","width":"100px","height":"100px"},' +
+        '{"backgroundColor":"green","width":"50px","height":"100px"},' +
+        '{"backgroundColor":"blue","width":"100px","height":"50px"}' +
+        ']'
+
+    var objKolok = JSON.parse(jsonKolok)
+    console.log(objKolok)
+
+    var prvDiv = document.getElementById("prvDiv")
+    prvDiv.style.backgroundColor = objKolok[0].backgroundColor;
+    prvDiv.style.width = objKolok[0].width;
+    prvDiv.style.height = objKolok[0].height;
+    prvDiv.style.position = "absolute"
+
+    var i = 0;
+
+    function dvizhiDesno()
+    {
+        $("div").animate({left: screen.width}, "slow");
+
+        var novDiv = document.createElement("div");
+        document.body.appendChild(novDiv);
+
+        novDiv.style.position = "absolute";
+
+        i--;
+        if (i < 0)
+            i = 2;
+
+        novDiv.style.background = objKolok[i].backgroundColor;
+        novDiv.style.width = objKolok[i].width;
+        novDiv.style.height = objKolok[i].height;
+    }
+
+    function dvizhiLevo()
+    {
+        $("div").animate({right: screen.width}, "slow"); // site divovi se animiraat
+
+        var novDiv = document.createElement("div");
+        document.body.appendChild(novDiv);
+
+        novDiv.style.position = "absolute";
+        // novDiv.style.float = "right"
+
+        i++;
+        if (i > 2)
+            i = 0;
+
+        novDiv.style.background = objKolok[i].backgroundColor;
+        novDiv.style.width = objKolok[i].width;
+        novDiv.style.height = objKolok[i].height;
+    }
+
+</script>
+</body>
+</html>

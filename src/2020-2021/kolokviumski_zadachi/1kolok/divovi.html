@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="tekst"><input type="button" value="vnesi" onclick="vnesi()">
+<div id="divovi">
+
+</div>
+<script>
+
+    function vnesi(){
+
+        var podatoci = document.getElementById("tekst").value
+        var elementi = podatoci.split(",") //ova e niza
+
+        var color = elementi[0]
+        var heigth = elementi[1]
+        var width = elementi[2]
+        var name = elementi[3]
+
+        var tekstDiv = "<div style='background-color:"+color+"; height: "+heigth+"px; width: "+width+"px; ' onclick='this.remove()'>"+changeName(name)+"</div>"
+        var div = document.getElementById("divovi")
+        div.innerHTML += tekstDiv
+    }
+
+    function changeName(name){
+        // ako e na parna pozicija da bide mala, inaku golema
+
+        var changedTxt = ""
+        for (var n in name){
+
+            if (n % 2 == 0 && name[n] == name[n].toUpperCase()){
+                changedTxt += name[n].toLowerCase()
+            }
+            else if (n % 2 != 0 && name[n] == name[n].toLowerCase()){
+                changedTxt += name[n].toUpperCase()
+            }
+            else {
+                changedTxt += name[n]
+            }
+        }
+        return changedTxt
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<h1>Vakcinacija</h1>
+<form name="forma">
+    <div><label>ime</label><input type="text" id="ime"></div>
+    <div><label>prezime</label><input type="text" id="prezime"></div>
+    <div><label>matichen</label><input type="text" id="id"></div>
+    <div><label>vozrast</label><input type="text" id="godini"></div>
+    <div><label>mejl</label><input type="text" id="email"></div>
+    <div><label>Grad</label>
+        <select id="lokacija" onchange="getLokacija()">
+            <option id="Skopje" value="Skopje">Skopje</option>
+            <option id="Bitola" value="Bitola">Bitola</option>
+            <option id="Tetovo" value="Tetovo">Tetovo</option>
+            <option id="Kumanovo" value="Kumanovo">Kumanovo</option>
+        </select>
+    </div>
+    <div id="pol">
+        <input id="mashko" type="radio" name="pol"><label>mashko</label>
+        <input id="zhensko" type="radio" name="pol"><label>zhensko</label>
+    </div>
+    <div id="vnesi"><input type="button" value="vnesi" onclick="dodadiPacient(); deleteForm()"></div>
+</form>
+<div>
+    <h1>Maloletni</h1>
+    <table id="maloletni">
+        <tr>
+            <th>ime</th>
+            <th>prezime</th>
+            <th>email</th>
+            <th>lokacija</th>
+            <th>vakciniran</th>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <h1>Polnoletni</h1>
+    <table id="polnoletni">
+        <tr>
+            <th>ime</th>
+            <th>prezime</th>
+            <th>email</th>
+            <th>lokacija</th>
+            <th>vakciniran</th>
+        </tr>
+    </table>
+</div>
+
+<div id="vakcinirani">
+    <h1>Vakcinirani</h1>
+</div>
+<script>
+
+    function deleteForm(){
+        document.forma.reset()
+    }
+
+    var json2 = '[' +
+        '{' +
+        '"ime":"Angela",' +
+        '"prezime":"Angelova",' +
+        '"id":"1503996780019",' +
+        '"pol":"1",' +
+        '"godini":"25",' +
+        '"email":"anchian@yahoo.com",' +
+        '"lokacija":"Bitola"' +
+        '},' +
+        '{' +
+        '"ime":"Dimitar",' +
+        '"prezime":"Dimitrov",' +
+        '"id":"1204950490019",' +
+        '"pol":"2",' +
+        '"godini":"71",' +
+        '"email":"dimitar.dimitrov@gmail.com",' +
+        '"lokacija":"Skopje"' +
+        '}' +
+        ']'
+
+    var obj2 = JSON.parse(json2)
+    console.log(obj2)
+
+    //globalni promenlivi
+    var tekst = ""
+    var maloletni = document.getElementById("maloletni")
+    var polnoletni = document.getElementById("polnoletni")
+
+    //funkcija za dodavanje vo tabeli
+    function polniTabela(ime,prezime,id,pol,godini,email,lokacija){
+
+        if (pol == 1){
+            tekst = "<tr style='background-color: orangered'>" +
+                "<td>"+ime+"</td>" +
+                "<td>"+prezime+"</td>" +
+                "<td>"+email+"</td>" +
+                "<td>"+lokacija+"</td>" +
+                "<td><input type='button' value='vakciniraj' onclick='vakciniraj(this)'></td>" +
+                "</tr>"
+        }
+        if (pol == 2){
+            tekst = "<tr style='background-color: cadetblue'>" +
+                "<td>"+ime+"</td>" +
+                "<td>"+prezime+"</td>" +
+                "<td>"+email+"</td>" +
+                "<td>"+lokacija+"</td>" +
+                "<td><input type='button' value='vakciniraj' onclick='vakciniraj(this)'></td>" +
+                "</tr>"
+        }
+
+        if (godini < 18)
+            maloletni.innerHTML += tekst
+        else
+            polnoletni.innerHTML += tekst
+    }
+
+    //stavanje json vo tabeli
+    for (var o in obj2){
+        var ime = obj2[o].ime
+        var prezime = obj2[o].prezime
+        var id = obj2[o].id
+        var pol = obj2[o].pol
+        var godini = obj2[o].godini
+        var email = obj2[o].email
+        var lokacija = obj2[o].lokacija
+
+        polniTabela(ime,prezime,id,pol,godini,email,lokacija)
+    }
+
+
+    //dodavanje novi elementi vo tabeli
+    function dodadiPacient(){
+        var ime = document.getElementById("ime").value
+        var prezime = document.getElementById("prezime").value
+        var id = document.getElementById("id").value
+        var godini = document.getElementById("godini").value
+        var email = document.getElementById("email").value
+        var lokacija = document.getElementById("lokacija").value
+        var pol
+
+        // checked values od pol
+        var mashko = document.getElementById("mashko")
+        var zhensko = document.getElementById("zhensko")
+
+        //odreduvanje pol preku checked values
+        if (zhensko.checked)
+            pol = 1
+        if (mashko.checked)
+            pol = 2
+
+
+        if (id.length == 13 && (email.slice(-10)=="@yahoo.com" || email.slice(-10)=="@gmail.com")){ //indexOf
+
+            var kelii = document.getElementsByTagName("td")
+            var flag = 0
+            for (var k of kelii){
+                if (k.innerText == email){
+                    flag = 1
+                    break;
+                }
+            }
+
+            if (flag == 1){
+                k.parentNode.childNodes[3].innerText = lokacija
+                console.log(k.parentNode.childNodes[3].innerText)
+                console.log(lokacija)
+            }
+            else
+                polniTabela(ime,prezime,id,pol,godini,email,lokacija)
+
+        }
+
+        else
+            alert("Greshka pri vnes")
+
+    }
+
+    // vadenje od tabela i dodavanje vo lista na vakcinirani
+    function vakciniraj(elem){
+        var vakcinirani = document.getElementById("vakcinirani")
+        console.log("elem.parentNode.parentNode.childNodes[0].innerText "+elem.parentNode.parentNode.childNodes[0].innerText)
+        console.log("elem: "+elem)
+        vakcinirani.innerHTML += elem.parentNode.parentNode.childNodes[0].innerText + "</p>"
+
+        elem.parentNode.parentNode.remove()
+    }
+
+</script>
+</body>
+</html>

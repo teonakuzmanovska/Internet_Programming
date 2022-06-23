@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>kolok2</title>
+    <script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+
+<input type="button" value="<" id="levo" onclick="dvizhiLevo()">
+<input type="button" value=">" id="desno" onclick="dvizhiDesno()">
+
+<div id="divoviHome" style="width: 1536px">
+
+</div>
+
+<script>
+
+    var jsonKolok = '[' +
+        '{"backgroundColor":"red","width":"100px","height":"100px"},' +
+        '{"backgroundColor":"green","width":"50px","height":"100px"},' +
+        '{"backgroundColor":"blue","width":"100px","height":"50px"}' +
+        ']'
+
+    var objKolok = JSON.parse(jsonKolok)
+    console.log(objKolok)
+
+    var tekst = ""
+    var listaDivovi = new Array()
+
+    for (var o in objKolok)
+    {
+        var color = objKolok[o].backgroundColor
+        var width = objKolok[o].width
+        var height = objKolok[o].height
+
+        // praea problem navodnicite. Gi smeniv " so '
+        // tekst = "<div id='miniDiv' style='position: absolute; background-color:"+color+"; width: "+width+"; height: "+height+";'></div>"
+        tekst = '<div id="miniDiv" style="position: absolute; background-color:'+color+'; width: '+width+'; height: '+height+';"></div>'
+
+        listaDivovi.push(tekst)
+    }
+    console.log(listaDivovi)
+
+    var divoviHome = document.getElementById("divoviHome")
+    divoviHome.innerHTML = listaDivovi[0]
+
+    console.log(document.getElementById("miniDiv").outerHTML)
+
+    // Koga $(tekovenDiv).animate({left: "toggle"}); e pred if-ovite, samo se dvizhi prviot i ne se pojavuva nishto
+    // Koga $(tekovenDiv).animate({left: "toggle"}); e nadvor od if-ovite, se pojavuvaat baranite elementi, ama ne se dvizhi nieden
+
+    function dvizhiLevo()
+    {
+        var tekovenDiv = document.getElementById("miniDiv")
+        // $(tekovenDiv).animate({left: screen.width}, "slow");
+        // $(tekovenDiv).animate({left: "toggle"});
+
+        if (tekovenDiv.outerHTML == listaDivovi[0])
+        {
+            $(tekovenDiv).animate({right: screen.width}, "slow");
+            divoviHome.innerHTML = listaDivovi[2]
+        }
+        if (tekovenDiv.outerHTML == listaDivovi[1])
+        {
+            // $(tekovenDiv).animate({left: "toggle"});
+            $(tekovenDiv).animate({right: screen.width}, "slow");
+            divoviHome.innerHTML = listaDivovi[0]
+        }
+        if (tekovenDiv.outerHTML == listaDivovi[2])
+        {
+            // $(tekovenDiv).animate({left: "toggle"});
+            $(tekovenDiv).animate({right: screen.width}, "slow");
+            divoviHome.innerHTML = listaDivovi[1]
+        }
+    }
+
+    function dvizhiDesno()
+    {
+        var tekovenDiv = document.getElementById("miniDiv")
+        // $(tekovenDiv).animate({right: screen.width}, "slow");
+        // $(tekovenDiv).animate({right: "toggle"});
+
+        if (tekovenDiv.outerHTML == listaDivovi[0])
+        {
+            // $(tekovenDiv).animate({right: "toggle"});
+            $(tekovenDiv).animate({left: screen.width}, "slow");
+            divoviHome.innerHTML = listaDivovi[1]
+        }
+        if (tekovenDiv.outerHTML == listaDivovi[1])
+        {
+            // $(tekovenDiv).animate({right: "toggle"});
+            $(tekovenDiv).animate({left: screen.width}, "slow");
+            divoviHome.innerHTML = listaDivovi[2]
+        }
+        if (tekovenDiv.outerHTML == listaDivovi[2])
+        {
+            // $(tekovenDiv).animate({right: "toggle"});
+            $(tekovenDiv).animate({left: screen.width}, "slow");
+            divoviHome.innerHTML = listaDivovi[0]
+        }
+    }
+
+</script>
+</body>
+</html>
